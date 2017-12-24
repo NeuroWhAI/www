@@ -9,7 +9,7 @@
         My web pages.
       </h2>
       <div class="links">
-        <a href="https://github.com/NeuroWhAI" target="_blank" class="button--green">Profile</a>
+        <a href="https://neurowhai.github.io/" target="_blank" class="button--green">Profile</a>
         <a href="https://github.com/NeuroWhAI/www" target="_blank" class="button--grey">GitHub</a>
       </div>
     </div>
