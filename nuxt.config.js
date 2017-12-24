@@ -34,5 +34,12 @@ module.exports = {
         })
       }
     }
-  }
+  },
+
+  /*
+  ** My custom config
+  */
+  css: [
+    'assets/main.css'
+  ]
 }
