@@ -6,11 +6,11 @@
         neurowhai
       </h1>
       <h2 class="subtitle">
-        neurowhai
+        My web pages.
       </h2>
       <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">Documentation</a>
-        <a href="https://github.com/nuxt/nuxt.js" target="_blank" class="button--grey">GitHub</a>
+        <a href="https://github.com/NeuroWhAI" target="_blank" class="button--green">Profile</a>
+        <a href="https://github.com/NeuroWhAI/www" target="_blank" class="button--grey">GitHub</a>
       </div>
     </div>
   </section>
