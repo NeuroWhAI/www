@@ -1,0 +1,166 @@
+<html>
+
+<head>
+    <title>Merry Christmas</title>
+    <meta charset="UTF-8">
+    <meta name="author" content="NeuroWhAI">
+    <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+    <script>
+        var g_stage = null;
+        var g_snows = [];
+
+        function init() {
+            var firstOffsetX = 250;
+            var offsetX = firstOffsetX;
+
+            var firstOffsetY = 100;
+            var offsetY = firstOffsetY;
+
+            var firstTreeWidth = 300;
+            var treeWidth = firstTreeWidth;
+            var blockHeight = 150;
+            var treeCount = 3;
+            var sizeGap = 64;
+
+            var stage = new createjs.Stage("board");
+            g_stage = stage;
+
+            // Background
+            var back = new createjs.Shape();
+            var g = back.graphics;
+            g.beginFill("#000000");
+            g.drawRect(0, 0, 800, 600);
+            g.beginFill("#ffffff");
+            g.drawRect(0, 500, 800, 100);
+            stage.addChild(back);
+
+            // Snow
+            var snowCount = 32;
+            for (var i = 0; i < snowCount; ++i) {
+                var snow = new createjs.Shape();
+                var g = snow.graphics;
+                g.beginFill("#ffffff");
+                g.drawCircle(0, 0, 6 + Math.random() * 3);
+                snow.x = Math.random() * 800;
+                snow.y = Math.random() * 600;
+                stage.addChild(snow);
+
+                g_snows.push(snow);
+            }
+
+            // Leaf
+            for (var t = 0; t < treeCount; ++t) {
+                var tree = new createjs.Shape();
+                var g = tree.graphics;
+                g.beginFill("#009900");
+                g.moveTo(treeWidth / 2, 0);
+                g.lineTo(treeWidth, blockHeight);
+                g.lineTo(0, blockHeight);
+                g.lineTo(treeWidth / 2, 0);
+                g.closePath();
+                tree.x = offsetX;
+                tree.y = offsetY;
+                stage.addChild(tree);
+
+                if (t != treeCount - 1) {
+                    treeWidth += sizeGap;
+                    offsetX -= sizeGap / 2;
+                    offsetY += blockHeight * 0.6;
+                }
+            }
+
+            // Wood
+            var woodWidth = 70;
+            var woodHeight = 110;
+            var wood = new createjs.Shape();
+            var g = wood.graphics;
+            g.beginFill("#663300");
+            g.drawRect((treeWidth - woodWidth) / 2, blockHeight, woodWidth, woodHeight);
+            wood.x = offsetX;
+            wood.y = offsetY;
+            stage.addChild(wood);
+
+            // Star
+            var star = new createjs.Shape();
+            var g = star.graphics;
+            g.beginFill("#ffff00");
+            g.drawPolyStar(firstTreeWidth / 2, 0, 50, 5, 0.6, -90);
+            star.x = firstOffsetX;
+            star.y = firstOffsetY;
+            stage.addChild(star);
+
+            // Ball
+            var ballPositions = [
+                [95, 95],
+                [203, 113],
+                [122, 174],
+                [200, 227],
+                [31, 300],
+                [111, 264],
+                [258, 314],
+            ];
+
+            for (var b = 0; b < ballPositions.length; ++b) {
+                var bx = ballPositions[b][0];
+                var by = ballPositions[b][1];
+
+                var ball = new createjs.Shape();
+                var g = ball.graphics;
+                g.beginFill((Math.random() < 0.5) ? "#ff3333" : "#ff8000");
+                g.drawCircle(bx, by, 12);
+                ball.x = firstOffsetX;
+                ball.y = firstOffsetY;
+                stage.addChild(ball);
+            }
+
+            stage.update();
+
+            createjs.Ticker.framerate = 60;
+            createjs.Ticker.on("tick", tick);
+        }
+
+        function tick() {
+            // Snowy!
+            for (var s = 0; s < g_snows.length; ++s) {
+                var snow = g_snows[s];
+
+                snow.y += 1;
+
+                if (snow.y > 610) {
+                    snow.y = -10;
+                }
+            }
+
+            g_stage.update();
+        }
+    </script>
+    <style type="text/css">
+        body {
+            background: black;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+
+        p {
+            margin-top: 0;
+            margin-bottom: 64px;
+            color: white;
+            font-size: 64px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+</head>
+
+<body onload="init();">
+    <div class="container">
+        <p>Merry Christmas!</p>
+    </div>
+    <div class="container">
+        <canvas id="board" width="800" height="600"></canvas>
+    </div>
+</body>
+
+</html>
